@@ -21,7 +21,7 @@ app.use(cors({
 app.use(bodyParser.json());
 
 
-connectToDatabase
+connectToDatabase()
 
 //Routes
 app.use('/api/auth', authRoutes);
