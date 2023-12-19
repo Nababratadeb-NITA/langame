@@ -8,8 +8,11 @@ import Question from "../components/Question";
 const Dashboard = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [isOpen, setIsOpen] = useState(false); // Initialize isOpen state to false
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Adjust media query breakpoint
-
+  const [isMobile, setIsMobile] = useState(false); // Adjust media query breakpoint
+  
+  if(window.innerWidth<768){
+    setIsMobile(true);
+  }
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
     if (language === "spanish") {
