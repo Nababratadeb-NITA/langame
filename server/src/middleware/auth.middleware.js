@@ -6,24 +6,23 @@ const JWTSecret = process.env.JWTSecret || 'secret';
 
 
 const authenticateAdmin = async (req, res, next) => {
-  const token = req.header('Authorization');
+  const {username,password} = req.body;
 
-  if (!token) {
-    return res.status(401).json({ message: 'Access denied. Token is missing.' });
+  if (!username || !password) {
+    return res.status(401).json({ message: 'Access denied.Something is missing.' });
   }
 
   try {
-    const decoded = jwt.verify(token, JWTSecret);
 
-    // Fetch admin from the database based on adminId in the decoded token
-    const admin = await Admin.findOne({ _id: decoded.adminId });
+    const admin = await Admin.findOne({ username: username });
 
     if (!admin) {
-      return res.status(401).json({ message: 'Access denied. Invalid token.' });
+      return res.status(401).json({ message: 'Access denied. Invalid admin' });
     }
-
+    if (password != admin.password){
+      return res.status(401).json({ message: 'Access denied. Invalid credentials' });
+    }
     req.admin = admin;
-    req.token = token;
     next();
   } catch (error) {
     res.status(400).json({ message: 'Invalid token.' });

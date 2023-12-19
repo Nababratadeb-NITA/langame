@@ -1,5 +1,18 @@
 const User = require('../models/User');
 
+// Get All users
+exports.getAllUsers = async (req, res) => {
+  try {
+    // Find user by userId
+    const users = await User.find();
+
+    // Return user data
+    res.json({ users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 // Get one user by userId
 exports.getUserById = async (req, res) => {
   try {
@@ -20,7 +33,6 @@ exports.getUserById = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
-
 // Update highest score and highestScoreLang for a user
 exports.updateUserScore = async (req, res) => {
   try {

@@ -4,8 +4,11 @@ const cors = require('cors');
 const connectToDatabase = require('./database');
 
 //Routes 
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
+const adminRoutes = require('./routes/admin.routes');
+const questionRoutes = require('./routes/question.routes');
+const leaderboardRoutes = require('./routes/leaderboard.routes');
 
 
 const app = express();
@@ -26,6 +29,9 @@ connectToDatabase()
 //Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/question', questionRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
 
 // Start the server
 app.listen(port, () => {
