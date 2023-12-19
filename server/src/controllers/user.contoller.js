@@ -24,15 +24,10 @@ exports.getUserById = async (req, res) => {
 // Update highest score and highestScoreLang for a user
 exports.updateUserScore = async (req, res) => {
   try {
-    const { userId, highestScore, highestScoreInLang } = req.body;
-
-    // Find user by userId
-    const user = await User.findById(userId);
-
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+    const { highestScore, highestScoreInLang } = req.body;
+    
+    // Access the user from the request (populated by the middleware)
+    const { user } = req;
 
     // Update user's highest score and highestScoreLang
     user.highestScore = highestScore;

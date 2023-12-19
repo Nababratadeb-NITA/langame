@@ -3,25 +3,27 @@ const mongoose = require('mongoose');
 const questionSchema = new mongoose.Schema({
   question: {
     type: String,
-    unique: true,
     required: true,
   },
-  answer: {
+  options: [{
     type: String,
+    required: true,
+  }],
+  correctOption: {
+    type: String,
+    required: true,
+  },
+  difficulty: {
+    type: Number,
+    enum: [1, 2, 3, 4, 5],
     required: true,
   },
   language:{
     type: String,
-    required: true
-  },
-  difficulty:{
-    type: Number,
     required: true,
-    min: 1,
-    max: 5,
   },
 });
 
-const Question = mongoose.model('Question', questionSchema);
+const Question = mongoose.model('questions', questionSchema);
 
 module.exports = Question;
