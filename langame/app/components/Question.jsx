@@ -15,9 +15,10 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
     const fetchQuestions = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:8000/api/question/language/${selectedLanguage}`);
+        let lang = selectedLanguage.toLowerCase();
+        const response = await fetch(`http://localhost:8000/api/question/language/${lang}`);
         const data = await response.json();
-        setQuestions(data);
+        setQuestions(data.questions);
       } catch (error) {
         console.error('Error fetching questions:', error);
       } finally {

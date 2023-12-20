@@ -29,29 +29,26 @@ export default function LoginPage() {
           password,
         }),
       });
-
-      if (responseRegister.ok) {
-        // User does not exist, proceed with registration
-        const responseLogin = await fetch(apiUrlLogin, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        });
-
-        if (responseLogin.ok) {
-          // Login successful, redirect the user
-          router.push("/dashboard");
-        } else {
-          // Handle login error
-          const data = await responseLogin.json();
-          setError(data.message || 'Login failed');
-        }
+      const responseLogin = await fetch(apiUrlLogin, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+      if (responseLogin.ok) {
+        // Login successful, redirect the user
+        router.push("/dashboard");
       } else {
+        // Handle login error
+        const data = await responseLogin.json();
+        setError(data.message || 'Login failed');
+      }
+      
+      if (!responseRegister.ok) {
         // User already exists, handle accordingly (e.g., show an error message)
         setError('User already exists. Please login.');
       }
