@@ -14,7 +14,32 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    router.push("/dashboard");
+    try {
+      const apiUrl = 'http://localhost:8000/api/auth/register';
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        // Registration successful, you might want to redirect the user
+        router.push("/dashboard");
+      } else {
+        // Handle registration error
+        const data = await response.json();
+        setError(data.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setError('Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -32,7 +57,7 @@ export default function LoginPage() {
             <input
               type="text"
               id="username"
-              className="bg-gray-100 border rounded-md focus:ring focus:ring-blue-500 focus:ring-opacity-50 w-full py-2 px-3 text-sm"
+              className="text-black bg-gray-100 border rounded-md focus:ring focus:ring-blue-500 focus:ring-opacity-50 w-full py-2 px-3 text-sm"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -47,7 +72,7 @@ export default function LoginPage() {
             <input
               type="password"
               id="password"
-              className="bg-gray-100 border rounded-md focus:ring focus:ring-blue-500 focus:ring-opacity-50 w-full py-2 px-3 text-sm"
+              className="text-black bg-gray-100 border rounded-md focus:ring focus:ring-blue-500 focus:ring-opacity-50 w-full py-2 px-3 text-sm"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
