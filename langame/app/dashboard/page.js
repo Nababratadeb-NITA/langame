@@ -9,7 +9,7 @@ import LanguageSelection from "../components/Langauge";
 
 
 const Dashboard = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   return (
