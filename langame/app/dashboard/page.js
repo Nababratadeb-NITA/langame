@@ -12,8 +12,6 @@ const Dashboard = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const options = ["the boy", "the girl", "the man", "the woman"];
-
   return (
     <div>
       <nav className="bg-gray-800 text-white flex justify-between items-center px-4 py-2">
@@ -33,7 +31,7 @@ const Dashboard = () => {
       {!selectedLanguage && <LanguageSelection onLanguageSelected={setSelectedLanguage} />}
 
       {/* Conditionally render the Quiz component */}
-      {selectedLanguage && <Question question={"el nina"} answers={options} correctAnswer={"the girl"} onFinish={""} />}
+      {selectedLanguage && <Question selectedLanguage={selectedLanguage} setSelectedLanguage={setSelectedLanguage} />}
 
       <BottomNavbar />
     </div>

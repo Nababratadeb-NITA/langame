@@ -15,9 +15,11 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const apiUrl = 'http://localhost:8000/api/auth/register';
+      const apiUrlRegister = 'http://localhost:8000/api/auth/register';
+      const apiUrlLogin = 'http://localhost:8000/api/auth/login';
 
-      const response = await fetch(apiUrl, {
+      // Check if the user already exists by trying to register
+      const responseRegister = await fetch(apiUrlRegister, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,17 +30,34 @@ export default function LoginPage() {
         }),
       });
 
-      if (response.ok) {
-        // Registration successful, you might want to redirect the user
-        router.push("/dashboard");
+      if (responseRegister.ok) {
+        // User does not exist, proceed with registration
+        const responseLogin = await fetch(apiUrlLogin, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
+
+        if (responseLogin.ok) {
+          // Login successful, redirect the user
+          router.push("/dashboard");
+        } else {
+          // Handle login error
+          const data = await responseLogin.json();
+          setError(data.message || 'Login failed');
+        }
       } else {
-        // Handle registration error
-        const data = await response.json();
-        setError(data.message || 'Registration failed');
+        // User already exists, handle accordingly (e.g., show an error message)
+        setError('User already exists. Please login.');
       }
     } catch (error) {
-      console.error('Error during registration:', error);
-      setError('Registration failed. Please try again.');
+      console.error('Error during login:', error);
+      setError('Login failed. Please try again.');
     }
   };
 

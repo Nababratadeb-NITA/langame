@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import CharacterImage from './CharacterImage';
 
 
 const LanguageSelection = ({ onLanguageSelected }) => {
@@ -11,6 +10,9 @@ const LanguageSelection = ({ onLanguageSelected }) => {
 
   const handleLanguageSelect = () => {
     if (selectedLanguage) {
+
+      localStorage.setItem('selectedLanguage', selectedLanguage);
+
       // Pass the selected language to the parent component
       onLanguageSelected(selectedLanguage);
 
