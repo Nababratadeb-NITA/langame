@@ -4,6 +4,7 @@ const questionSchema = new mongoose.Schema({
   question: {
     type: String,
     required: true,
+    unique: true,
   },
   options: [{
     type: String,
@@ -18,7 +19,7 @@ const questionSchema = new mongoose.Schema({
     enum: [1, 2, 3, 4, 5],
     required: true,
   },
-  language:{
+  language: {
     type: String,
     required: true,
   },
