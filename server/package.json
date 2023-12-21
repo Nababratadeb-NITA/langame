@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "build":"node -v",
+    "build": "node -v",
     "doc_gen": "node src/utils/swagger.js"
   },
   "keywords": [],
