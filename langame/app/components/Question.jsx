@@ -58,30 +58,33 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
     <div className="quiz-container mx-auto p-8 max-w-md">
       <h1 className="text-2xl font-bold mb-4">Quiz App</h1>
 
-      {questions.length > 0 && currentQuestion ? (
-        <Ques
-          question={"el dorado"}
-          options={options1}
-          onOptionSelect={handleOptionSelect}
-        />
-      ) : (
-        <p>No questions available.</p>
-      )}
-
-      <button
-        className="bg-green-500 text-white py-2 px-4 rounded mt-4"
-        onClick={handleCheckAnswer}
-      >
-        Check Answer
-      </button>
-
-      {currentQuestionIndex === questions.length - 1 && (
-        <div className="text-2xl font-bold mt-4">
-          Your Final Score: {score}/{questions.length}
-        </div>
-      )}
+      <Ques />
+     
     </div>
   );
 };
 
 export default QuizApp;
+
+// {questions.length > 0 && currentQuestion ? (
+//   <Ques
+//     question={"el dorado"}
+//     options={options1}
+//     onOptionSelect={handleOptionSelect}
+//   />
+// ) : (
+//   <p>No questions available.</p>
+// )}
+
+// <button
+//   className="bg-green-500 text-white py-2 px-4 rounded mt-4"
+//   onClick={handleCheckAnswer}
+// >
+//   Check Answer
+// </button>
+
+// {currentQuestionIndex === questions.length - 1 && (
+//   <div className="text-2xl font-bold mt-4">
+//     Your Final Score: {score}/{questions.length}
+//   </div>
+// )}

@@ -16,15 +16,7 @@ const Dashboard = () => {
     <div>
       <nav className="bg-gray-800 text-white flex justify-between items-center px-4 py-2">
         <span className="text-xl font-bold">Your App Name</span>
-        {!isMobile && (
-          <span
-            className="cursor-pointer px-2 py-1 rounded-md font-semibold"
-            onClick={""}
-          >
-            Language: ({selectedLanguage ? selectedLanguage.name : 'Select'})
-          </span>
-        )}
-        
+       
       </nav>
       
       {/* Conditionally render the LanguageSelection component */}
