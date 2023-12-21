@@ -41,7 +41,7 @@ export default function AdminPage() {
       });
       if (responseLogin.ok) {
         // Login successful, redirect the user
-        router.push("/dashboard");
+        router.push("/admindashboard");
       } else {
         // Handle login error
         const data = await responseLogin.json();
