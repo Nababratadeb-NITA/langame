@@ -15,8 +15,8 @@ export default function SignInPage() {
     e.preventDefault();
 
     try {
-      const apiUrlRegister = "http://localhost:8000/api/auth/register";
-      const apiUrlLogin = "http://localhost:8000/api/auth/login";
+      const apiUrlRegister = `${Backend_URL}/auth/register`;
+      const apiUrlLogin = `${Backend_URL}/auth/login`;
 
       // Check if the user already exists by trying to register
       const responseRegister = await fetch(apiUrlRegister, {

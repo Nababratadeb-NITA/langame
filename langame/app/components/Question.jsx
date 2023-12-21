@@ -17,9 +17,13 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
       try {
         setLoading(true);
         let lang = selectedLanguage.toLowerCase();
+<<<<<<< Updated upstream
         const response = await fetch(
           `https://langgame-server.onrender.com/api/question/language/${lang}`
         );
+=======
+        const response = await fetch(`${Backend_URL}/question/language/${lang}`);
+>>>>>>> Stashed changes
         const data = await response.json();
         setQuestions(data.questions);
       } catch (error) {

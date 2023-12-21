@@ -15,20 +15,8 @@ export default function AdminPage() {
     e.preventDefault();
 
     try {
-      const apiUrlRegister = "https://langgame-server.onrender.com/api/admin/login";
-      const apiUrlLogin = "https://langgame-server.onrender.com/api/admin/login";
+      const apiUrlLogin = `${Backend_URL}/admin/login`;
 
-      // Check if the user already exists by trying to register
-      const responseRegister = await fetch(apiUrlRegister, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
       const responseLogin = await fetch(apiUrlLogin, {
         method: "POST",
         headers: {
@@ -41,6 +29,8 @@ export default function AdminPage() {
       });
       if (responseLogin.ok) {
         // Login successful, redirect the user
+        const data = await responseLogin.json();
+        localStorage.setItem('token', data.token);
         router.push("/admindashboard");
       } else {
         // Handle login error
@@ -62,10 +52,10 @@ export default function AdminPage() {
     <div className="flex bg-[#0d1829] min-h-screen items-center justify-center">
       <div className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-300 shadow-none">
         <h4 className="block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-          Sign Up
+          Log In
         </h4>
         <p className="mt-1 block font-sans text-base font-normal leading-relaxed text-gray-300 antialiased">
-          Enter your details to register.
+          Enter your details
         </p>
         <form
           onSubmit={handleSubmit}

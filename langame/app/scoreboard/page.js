@@ -9,7 +9,7 @@ const Scoreboard = () => {
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
-        const response = await fetch("https://langgame-server.onrender.com/api/leaderboard");
+        const response = await fetch(`${Backend_URL}/leaderboard`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch leaderboard data");

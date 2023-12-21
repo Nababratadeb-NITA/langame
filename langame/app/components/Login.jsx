@@ -15,8 +15,8 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const apiUrlRegister = "https://langgame-server.onrender.com/api/auth/register";
-      const apiUrlLogin = "https://langgame-server.onrender.com/api/auth/login";
+      const apiUrlRegister = `${Backend_URL}/auth/register`;
+      const apiUrlLogin = `${Backend_URL}/auth/login`;
 
       // Check if the user already exists by trying to register
       const responseRegister = await fetch(apiUrlRegister, {

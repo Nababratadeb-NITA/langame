@@ -3,6 +3,30 @@ const jwt = require('jsonwebtoken');
 
 const JWTSecret = process.env.JWTSecret || 'secret';
 
+
+//Admin Register
+exports.register = async (req,res)=>{
+  const { username, password } = req.body;
+
+  // Create new user
+  const newAdmin = new Admin({
+    username,
+    password: password,
+    jwtTokens: [], // Initialize jwtTokens array
+  });
+
+  // Save user to database
+  const savedAdmin = await newAdmin.save();
+
+  // Create and sign JWT for initial login
+  const token = jwt.sign({ adminId: savedAdmin._id }, JWTSecret, { expiresIn: '24h' });
+  
+  // Add the token to the user's jwtTokens array
+  await savedAdmin.addToken(token);
+
+  // Return response
+  res.json({ message: 'Registration successful', Admin: savedAdmin, token });
+}
 // Admin login
 exports.login = async (req, res) => {
   try {
@@ -27,7 +51,7 @@ exports.login = async (req, res) => {
     admin.addToken(token);
 
     // Return response with token
-    res.json({ message: 'Login successful', token });
+    res.json({ message: 'Login successful', token, admin });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
