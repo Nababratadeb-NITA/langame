@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -40,6 +40,15 @@ export default function LoginPage() {
         }),
       });
       if (responseLogin.ok) {
+        const data = await responseLogin.json();
+        console.log(data);
+        const token = data.token;
+        const userId = data.user._id;
+        console.log(token);
+        console.log(useId);
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+
         // Login successful, redirect the user
         router.push("/dashboard");
       } else {
