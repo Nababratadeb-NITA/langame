@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function AdminPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -59,7 +59,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex bg-[#0d1829] min-h-screen items-center justify-center">
       <div className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-300 shadow-none">
         <h4 className="block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
           Sign Up
@@ -144,23 +144,13 @@ export default function LoginPage() {
             type="button"
             data-ripple-light="true"
           >
-            Register
+            Log in
           </button>
-          <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-300 antialiased">
-            Already have an account?
-            <Link
-              className="font-semibold text-pink-500 transition-colors hover:text-blue-700"
-              href={'/signin'}
-            >
-              Sign In
-            </Link>
-          </p>
-          
           <Link
           className="font-semibold flex items-center justify-center mt-8 text-pink-500 transition-colors hover:text-blue-700"
-          href={'/adminlogin'}
+          href={'/signin'}
         >
-          Admin login
+          User Login
         </Link>
         </form>
       </div>
