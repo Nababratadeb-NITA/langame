@@ -15,7 +15,7 @@ const leaderboardRoutes = require('./routes/leaderboard.routes');
 
 
 const app = express();
-const port = process.env.URL || 8000;
+const port = process.env.PORT || 8000;
 
 app.use(cors({
   origin: '*', // Change this to your actual Next.js app URL
