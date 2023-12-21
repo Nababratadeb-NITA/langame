@@ -15,9 +15,10 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const apiUrlRegister = `${Backend_URL}/auth/register`;
-      const apiUrlLogin = `${Backend_URL}/auth/login`;
+      const apiUrlRegister = `${process.env.Backend_URL}/auth/register`;
+      const apiUrlLogin = `${process.env.Backend_URL}/auth/login`;
 
+      console.log(apiUrlLogin);
       // Check if the user already exists by trying to register
       const responseRegister = await fetch(apiUrlRegister, {
         method: "POST",
@@ -41,6 +42,7 @@ export default function LoginPage() {
       });
       if (responseLogin.ok) {
         const data = await responseLogin.json();
+        console.log("data",data);
         const token = data.token;
         const userId = data.user._id;
         localStorage.setItem("token", token);
@@ -51,6 +53,7 @@ export default function LoginPage() {
       } else {
         // Handle login error
         const data = await responseLogin.json();
+        console.log("err : ",data);
         setError(data.message || "Login failed");
       }
 

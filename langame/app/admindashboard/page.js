@@ -19,7 +19,7 @@ const AdminDashboard = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch(`${Backend_URL}/question`);
+      const response = await fetch(`${process.env.Backend_URL}/question`);
       const data = await response.json();
       setQuestions(data.questions);
     } catch (error) {
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
   const handleAddQuestion = async () => {
     try {
         console.log("Token : ",localStorage.getItem('token'));
-      const response = await fetch(`${Backend_URL}/question`, {
+      const response = await fetch(`${process.env.Backend_URL}/question`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
 
   const handleDeleteQuestion = async (questionId) => {
     try {
-      await fetch(`${Backend_URL}/question/${questionId}`, {
+      await fetch(`${process.env.Backend_URL}/question/${questionId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `${localStorage.getItem('token')}`,

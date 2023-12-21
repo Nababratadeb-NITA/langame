@@ -9,7 +9,7 @@ const Scoreboard = () => {
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
-        const response = await fetch(`${Backend_URL}/leaderboard`);
+        const response = await fetch(`${process.env.Backend_URL}/leaderboard`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch leaderboard data");

@@ -15,8 +15,8 @@ export default function AdminPage() {
     e.preventDefault();
 
     try {
-      const apiUrlLogin = `${Backend_URL}/admin/login`;
-
+      const apiUrlLogin = `${process.env.Backend_URL}/admin/login`;
+      console.log(apiUrlLogin);
       const responseLogin = await fetch(apiUrlLogin, {
         method: "POST",
         headers: {
@@ -30,11 +30,13 @@ export default function AdminPage() {
       if (responseLogin.ok) {
         // Login successful, redirect the user
         const data = await responseLogin.json();
+        console.log("data : ",data);
         localStorage.setItem('token', data.token);
         router.push("/admindashboard");
       } else {
         // Handle login error
         const data = await responseLogin.json();
+        console.log("err : ",data);
         setError(data.message || "Login failed");
       }
 
