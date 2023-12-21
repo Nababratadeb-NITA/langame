@@ -3,10 +3,6 @@
 import { useState, useEffect } from 'react';
 import Ques from './Ques';
 
-const options1 = [
-  "city of trash", "city of dimond", "city of gold", "city of peace"
-]
-
 const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -14,13 +10,14 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   const [userAnswer, setUserAnswer] = useState(null);
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     // Fetch questions based on the selected language
     const fetchQuestions = async () => {
       try {
         setLoading(true);
         let lang = selectedLanguage.toLowerCase();
-        const response = await fetch(`http://localhost:8000/api/question/language/${lang}`);
+        const response = await fetch(`https://langgame-server.onrender.com/api/question/language/${lang}`);
         const data = await response.json();
         setQuestions(data.questions);
       } catch (error) {
@@ -55,10 +52,24 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className="quiz-container mx-auto p-8 max-w-md">
+    <div className="quiz-container h-screen mx-auto p-8 max-w-md">
       <h1 className="text-2xl font-bold mb-4">Quiz App</h1>
 
-      <Ques />
+      {questions.length > 0 && currentQuestion ? (
+        <Ques
+          question={currentQuestion.question}
+          options={currentQuestion.options}
+          onOptionSelect={handleOptionSelect}
+        />
+      ) : (
+        <p>No questions available.</p>
+      )}
+      
+      {currentQuestionIndex === questions.length - 1 && (
+        <div className="text-2xl font-bold mt-4">
+          Your Final Score: {score}/{questions.length}
+        </div>
+      )}
      
     </div>
   );
@@ -66,25 +77,4 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
 
 export default QuizApp;
 
-// {questions.length > 0 && currentQuestion ? (
-//   <Ques
-//     question={"el dorado"}
-//     options={options1}
-//     onOptionSelect={handleOptionSelect}
-//   />
-// ) : (
-//   <p>No questions available.</p>
-// )}
 
-// <button
-//   className="bg-green-500 text-white py-2 px-4 rounded mt-4"
-//   onClick={handleCheckAnswer}
-// >
-//   Check Answer
-// </button>
-
-// {currentQuestionIndex === questions.length - 1 && (
-//   <div className="text-2xl font-bold mt-4">
-//     Your Final Score: {score}/{questions.length}
-//   </div>
-// )}

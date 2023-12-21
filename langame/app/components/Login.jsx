@@ -41,11 +41,8 @@ export default function LoginPage() {
       });
       if (responseLogin.ok) {
         const data = await responseLogin.json();
-        console.log(data);
         const token = data.token;
         const userId = data.user._id;
-        console.log(token);
-        console.log(useId);
         localStorage.setItem("token", token);
         localStorage.setItem("userId", userId);
 

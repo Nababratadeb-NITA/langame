@@ -7,7 +7,6 @@ function page() {
   const [profileData, setProfileData] = useState();
   const [error, setError] = useState(null);
 
-  console.log(profileData);
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     const storedToken = localStorage.getItem("token");

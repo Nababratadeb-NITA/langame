@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 const LanguageSelection = ({ onLanguageSelected }) => {
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const router = useRouter();
-console.log(selectedLanguage);
   const handleLanguageSelect = () => {
     if (selectedLanguage) {
 
