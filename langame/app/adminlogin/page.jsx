@@ -15,8 +15,8 @@ export default function AdminPage() {
     e.preventDefault();
 
     try {
-      const apiUrlRegister = "http://localhost:8000/api/auth/register";
-      const apiUrlLogin = "http://localhost:8000/api/auth/login";
+      const apiUrlRegister = "https://langgame-server.onrender.com/api/admin/login";
+      const apiUrlLogin = "https://langgame-server.onrender.com/api/admin/login";
 
       // Check if the user already exists by trying to register
       const responseRegister = await fetch(apiUrlRegister, {
@@ -141,7 +141,7 @@ export default function AdminPage() {
           </div>
           <button
             className="mt-6 block w-full select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button"
+            type="submit"
             data-ripple-light="true"
           >
             Log in
