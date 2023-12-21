@@ -3,6 +3,10 @@
 import { useState, useEffect } from 'react';
 import Ques from './Ques';
 
+const options1 = [
+  "city of trash", "city of dimond", "city of gold", "city of peace"
+]
+
 const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -45,13 +49,10 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   };
 
   if (loading) {
-    return <div className="quiz-container mx-auto p-8 max-w-md">Loading...</div>;
+    return <div className="quiz-container mx-auto my-auto p-8 max-w-md">Loading...</div>;
   }
 
   const currentQuestion = questions[currentQuestionIndex];
-
-  console.log(currentQuestion);
-  console.log(currentQuestionIndex);
 
   return (
     <div className="quiz-container mx-auto p-8 max-w-md">
@@ -59,8 +60,8 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
 
       {questions.length > 0 && currentQuestion ? (
         <Ques
-          question={currentQuestion.question}
-          options={currentQuestion.options}
+          question={"el dorado"}
+          options={options1}
           onOptionSelect={handleOptionSelect}
         />
       ) : (

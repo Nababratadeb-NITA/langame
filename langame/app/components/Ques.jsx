@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Ques({ question, options, onOptionSelect }) {
+  
   return (
     <div className="mb-4">
     <h2 className="text-lg font-bold mb-2">{question}</h2>
