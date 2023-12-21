@@ -13,10 +13,10 @@ const Dashboard = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   return (
-    <div>
-      <nav className="bg-gray-800 text-white flex justify-between items-center px-4 py-2">
+    <div className="bg-[#0d1829] h-screen sm:h-full sm:mb-4">
+      <nav className="bg-gray-800 text-white flex justify-between items-center px-4 py-4">
         <span className="text-xl font-bold">Your App Name</span>
-       
+        
       </nav>
       
       {/* Conditionally render the LanguageSelection component */}

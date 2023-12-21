@@ -22,7 +22,7 @@ console.log(selectedLanguage);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-[#0d1829]">
       <div className="max-w-md w-full bg-white rounded-lg p-8 shadow-md">
    
         <h1 className="text-2xl text-center mb-6 font-bold">Select a Language</h1>

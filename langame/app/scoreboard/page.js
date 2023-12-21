@@ -34,7 +34,7 @@ const Scoreboard = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center h-screen bg-gray-800/50 text-white px-4 py-2 rounded-md">
+      <div className="flex flex-col items-center h-screen bg-[#0d1829] text-white px-4 py-2 rounded-md">
         <p className="text-xl font-bold mb-2">Leaderboard</p>
 
         <div className="flex items-center space-x-8">
