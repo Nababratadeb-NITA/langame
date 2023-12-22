@@ -62,23 +62,24 @@ const Scoreboard = () => {
 
       {sortedPlayers.length > 0 && (
         <table className="w-full text-sm mt-8">
-          <thead>
-            <tr>
-              <th className="px-2 py-1 underline">Rank</th>
-              <th className="px-2 py-1 underline">Player</th>
-              <th className="px-2 py-1 underline">XP</th>
+        <thead>
+          <tr>
+            <th className="px-2 py-1 underline">Rank</th>
+            <th className="px-2 py-1 underline">Player</th>
+            <th className="px-2 py-1 underline">XP</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedPlayers.map((player, index) => (
+            <tr key={player._id}>
+              <td className="px-2 py-1 ">{`# ${index + 1}`}</td>
+              <td className="px-2 py-1">{player.username}</td>
+              <td className="px-2 py-1">{player.highestScore}</td>
             </tr>
-          </thead>
-          <tbody>
-            {sortedPlayers.map((player, index) => (
-              <tr key={player._id}>
-                <td className="px-2 py-1 ">{index + 1}</td>
-                <td className="px-2 py-1 bg-white">{player.username}</td>
-                <td className="px-2 py-1 ">{player.highestScore}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
+      
       )}
       <BottomNavbar />
     </div>
