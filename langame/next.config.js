@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        "Backend_URL":"http://localhost:8000/api"
+        "Backend_URL":"https://langgame-server.onrender.com/api"
     },
 }
 

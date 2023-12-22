@@ -11,13 +11,45 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   const [timeOut, setTimeOut] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  console.log(score);
+
+  const updateUserScore = async () => {
+    try {
+      const storedUserId = localStorage.getItem('userId');
+      const storedToken = localStorage.getItem('token');
+
+      const response = await fetch(`${process.env.Backend_URL}/user/updateScore`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${storedToken}`, 
+        },
+        body: JSON.stringify({
+          userId: storedUserId,
+          highestScore: score,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Score updated successfully');
+      } else {
+        const errorData = await response.json();
+        console.error('Error updating score:', errorData.message || 'Unknown error');
+      }
+    } catch (error) {
+      console.error('Error updating score:', error);
+    }
+  };
+
   useEffect(() => {
     // Fetch questions based on the selected language
     const fetchQuestions = async () => {
       try {
         setLoading(true);
         let lang = selectedLanguage.toLowerCase();
-        const response = await fetch(`${process.env.Backend_URL}/question/language/${lang}`);
+        const response = await fetch(
+          `${process.env.Backend_URL}/question/language/${lang}`
+        );
         const data = await response.json();
         setQuestions(data.questions);
       } catch (error) {
@@ -29,6 +61,12 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
 
     fetchQuestions();
   }, [selectedLanguage]);
+
+  useEffect(() => {
+    if (timeOut) {
+      updateUserScore();
+    }
+  }, [timeOut]);
 
   const scorePyramid = useMemo(
     () =>
@@ -58,47 +96,32 @@ const QuizApp = ({ selectedLanguage, setSelectedLanguage }) => {
   }, [questionNumber, scorePyramid]);
 
   return (
-    <div className="quiz-container h-screen mx-auto p-8 max-w-md">
-      <h1 className="text-2xl font-bold mb-4">Quiz App</h1>
-      {timeOut ? (
-        <h1 className="endText">You scored: {score}</h1>
-      ) : (
-        <>
-          <div className="top">
-            <div className="timer">
-              <Timer
-                setTimeOut={setTimeOut}
+    <div className="quiz-container h-screen p-8 max-w-md mx-auto">
+      <div>
+        <h1 className="text-2xl font-bold">Quiz App</h1>
+        {timeOut ? (
+          <h1 className="endText">You scored: {score}</h1>
+        ) : (
+          <>
+            <div className="top mt-8">
+              <div className="timer ml-48 flex items-center">
+                <Timer
+                  setTimeOut={setTimeOut}
+                  questionNumber={questionNumber}
+                />
+              </div>
+            </div>
+            <div className="bottom mt-12 space-y-8">
+              <Ques
+                data={questions}
                 questionNumber={questionNumber}
+                setQuestionNumber={setQuestionNumber}
+                setTimeOut={setTimeOut}
               />
             </div>
-          </div>
-          <div className="bottom">
-            <Ques
-              data={questions}
-              questionNumber={questionNumber}
-              setQuestionNumber={setQuestionNumber}
-              setTimeOut={setTimeOut}
-            />
-          </div>
-        </>
-      )}
-
-      <div className="pyramid">
-      <ul className="moneyList">
-        {scorePyramid.map((m) => (
-          <li
-            className={
-              questionNumber === m.id
-                ? "moneyListItem active"
-                : "moneyListItem"
-            }
-          >
-            <span className="moneyListItemNumber">{m.id}</span>
-            <span className="moneyListItemAmount">{m.amount}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

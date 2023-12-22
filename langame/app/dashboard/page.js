@@ -10,8 +10,8 @@ import LanguageSelection from "../components/Langauge";
 
 const Dashboard = () => {
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  console.log(selectedLanguage);
   return (
     <div className="bg-[#0d1829] h-screen sm:h-full sm:mb-4">
       <nav className="bg-gray-800 text-white flex justify-between items-center px-4 py-4">

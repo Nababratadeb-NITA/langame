@@ -6,7 +6,7 @@ const AdminDashboard = () => {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState({
     question: '',
-    options: ['', '', ''],
+    options: ['', '', '', ''],
     correctOption: '',
     difficulty: 2,
     language: '',
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-12 bg-white m-8 rounded-xl ">
       <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
 
       {/* Form for adding a new question */}
@@ -155,13 +155,13 @@ const AdminDashboard = () => {
 
       {/* List of existing questions */}
       <div>
-        <h2 className="text-xl font-semibold mb-2">Questions</h2>
+        <h2 className="text-xl text-black font-semibold mb-2">Questions</h2>
         <ul>
           {questions.map((question) => (
-            <li key={question._id} className="mb-2">
+            <li key={question._id} className="mb-2 text-black">
               {question.question} - Difficulty: {question.difficulty}
               <button
-                className="ml-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700"
+                className="ml-2 bg-red-500 px-2 py-1 text-white rounded hover:bg-red-700"
                 onClick={() => handleDeleteQuestion(question._id)}
               >
                 Delete

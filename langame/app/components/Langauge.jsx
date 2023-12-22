@@ -36,9 +36,9 @@ const LanguageSelection = ({ onLanguageSelected }) => {
             onChange={(e) => setSelectedLanguage(e.target.value)}
           >
             <option value="" disabled>Select a language</option>
-            <option value="english">English</option>
-            <option value="spanish">Spanish</option>
-            <option value="bengali">Bengali</option>
+            <option value="italy">italy</option>
+            <option value="spain">spain</option>
+            <option value="japan">japan</option>
             <option value="french">French</option>
           </select>
         </div>
