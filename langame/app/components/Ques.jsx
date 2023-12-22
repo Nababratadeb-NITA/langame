@@ -48,8 +48,9 @@ function Ques({ data, questionNumber, setQuestionNumber, setTimeOut }) {
     <div className="trivia">
       <div className="question">{question?.question}</div>
       <div className="answers mt-8">
-        {question?.options.map((a) => (
+        {question?.options.map((a, i) => (
           <div
+          key={i}
             className={selectedAnswer === a ? className : "answer"}
             onClick={() => !selectedAnswer && handleClick(a)}
           >
