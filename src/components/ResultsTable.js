@@ -12,7 +12,7 @@ const ResultsTable = ({ results, currentId }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data.length / itemsPerPage);
-  const currentData = data.slice(
+  const currentData = results.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -72,14 +72,15 @@ const ResultsTable = ({ results, currentId }) => {
             </tr>
           </thead>
           <tbody>
-            {currentData.map((row, index) => (
+            {currentData.map((row, index) =>           
+             (
               <tr
                 key={index}
                 className={`${
                   index % 2 === 0 ? 'bg-blue-800' : 'bg-blue-700'
                 } hover:bg-blue-600`}
               >
-                <td className="px-4 py-2 text-xs md:text-sm">{currentId}</td>
+                <td className="px-4 py-2 text-xs md:text-sm">{row.id}</td>
                 <td
                   className={`px-4 py-2 text-lg md:text-2xl font-bold ${getColorClass(row.color)}`}
                 >

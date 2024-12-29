@@ -42,7 +42,6 @@ function App() {
     }
   }, [timeLeft, currentId]); 
  
-
   return (
     <Router> {/* Wrap the app in BrowserRouter */}
       <div className="App bg-[#2B3270] min-h-screen">
@@ -56,7 +55,7 @@ function App() {
                 <>
                   <Wallet />
                   <Lottery timeLeft={timeLeft} currentId={currentId.toString()} />
-                  <NumberSelection />
+                  <NumberSelection results={results} timeLeft={timeLeft} />
                   <ResultsTable results={results} currentId={currentId.toString()} />
                 </>
               }
