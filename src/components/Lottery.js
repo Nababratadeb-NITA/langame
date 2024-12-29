@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FaQuestionCircle } from 'react-icons/fa';
 
-const Lottery = () => {
-  const [timeLeft, setTimeLeft] = useState(10); // Timer starts at 30 seconds
-  const [currentId, setCurrentId] = useState(20241224100051508n); // Starting ID as BigInt
+const Lottery = ({currentId}) => {
+  const [timeLeft, setTimeLeft] = useState(150); // Timer starts at 2 minutes 30 seconds
+  const [currentId1, setCurrentId1] = useState(currentId); // Starting ID as BigInt
   const [showPopup, setShowPopup] = useState(false); // State for showing the popup
-
+  const [result, setResult] = useState(''); // State for the result message
+  
   // Timer logic
   useEffect(() => {
     if (timeLeft > 0) {
@@ -15,8 +16,11 @@ const Lottery = () => {
       return () => clearInterval(timer); // Clear the timer to prevent memory leaks
     } else {
       // When timer reaches 0, reset the timer and increment the ID
-      setTimeLeft(30); // Reset timer to 30 seconds
-      setCurrentId((prevId) => prevId + 1n); // Increment ID as BigInt
+      setTimeLeft(150); // Reset timer to 2 minutes 30 seconds
+      setCurrentId1((prevId) => prevId + 1n); // Increment ID as BigInt
+
+      // Announce result after timer reaches 0
+      setResult(`Result for ID ${currentId1.toString()}: ${Math.random() > 0.5 ? 'You Win!' : 'You Lose!'}`);
     }
   }, [timeLeft]); // Dependency array listens to changes in `timeLeft`
 
@@ -34,7 +38,7 @@ const Lottery = () => {
             How to play
           </button>
           {/* Win Go Text */}
-          <h2 className="text-lg font-bold mb-2">Win Go 30s</h2>
+          <h2 className="text-lg font-bold mb-2">Win Go 2m30s</h2>
           {/* Balls Section */}
           <div className="flex justify-center md:justify-start space-x-2">
             {['8', '0', '5', '4', '1'].map((num, index) => (
@@ -57,9 +61,11 @@ const Lottery = () => {
         <div className="flex-1 text-center">
           <h3 className="text-md font-bold mb-2">Time remaining</h3>
           <div className="text-2xl font-bold bg-black text-white rounded-lg px-4 py-2 inline-block tracking-wider">
-            {timeLeft < 10 ? `00 : 0${timeLeft}` : `00 : ${timeLeft}`}
+            {Math.floor(timeLeft / 60)
+              .toString()
+              .padStart(2, '0')} : {`${timeLeft % 60}`.padStart(2, '0')}
           </div>
-          <p className="text-sm mt-2">{currentId.toString()}</p>
+          <p className="text-sm mt-2">{currentId}</p>
         </div>
       </div>
 
