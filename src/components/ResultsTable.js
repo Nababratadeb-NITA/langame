@@ -29,6 +29,7 @@ const ResultsTable = ({ results, currentId }) => {
         return 'bg-gray-500';
     }
   };
+  
 
   const changePage = (page) => {
     if (page >= 1 && page <= totalPages) {

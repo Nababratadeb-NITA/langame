@@ -16,7 +16,6 @@ function App() {
 
   // Timer and result synchronization
   useEffect(() => {
-    console.log();
     
     if (timeLeft > 0) {
       const timer = setInterval(() => {
